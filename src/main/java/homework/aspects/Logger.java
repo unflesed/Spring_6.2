@@ -9,16 +9,14 @@ public class Logger {
 
     public void afterThrowing(Exception ex) {
         CounterRepositoryJPA crJPA = new CounterRepositoryJPA();
-        quantity++;
-        if (quantity == 1) {
-            Counter counter = new Counter();
-            counter.setQuantity(quantity);
-            crJPA.add(counter);
-        }else{
-            Counter counter;
-            counter = crJPA.getById(1);
-            counter.setQuantity(quantity);
-            crJPA.add(counter);
+        for (StackTraceElement ste : ex.getStackTrace()) {
+            if (ste.getClassName().equals("homework.controllers.CounterController")) {
+                Counter counter;
+                counter = crJPA.getById(1);
+                counter.setQuantity(counter.getQuantity() + 1);
+                crJPA.add(counter);
+            }
         }
     }
 }
+
