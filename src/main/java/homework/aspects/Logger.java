@@ -5,7 +5,6 @@ import homework.persistence.model.Counter;
 
 
 public class Logger {
-    private static int quantity;
 
     public void afterThrowing(Exception ex) {
         CounterRepositoryJPA crJPA = new CounterRepositoryJPA();
